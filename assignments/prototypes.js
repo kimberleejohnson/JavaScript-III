@@ -21,6 +21,16 @@
   * destroy() // prototype method that returns: `${this.name} was removed from the game.`
 */
 
+function GameObject(attributes) {
+  this.newCreatedAt = attributes.CreatedAt; 
+  this.newName = attributes.name; 
+  this.newDimensions = attributes.dimensions; 
+}
+
+GameObject.prototype.destroy = function() {
+  return `${this.name} was removed from the game.`
+}
+
 /*
   === CharacterStats ===
   * healthPoints
@@ -33,18 +43,34 @@
   * team
   * weapons
   * language
-  * greet() // prototype method -> returns the string '<object name> offers a greeting in <object language>.'
+  * greet() // prototype method -> returns the string '<object name> offers a greeting 
+  * in <object language>.'
   * should inherit destroy() from GameObject through CharacterStats
   * should inherit takeDamage() from CharacterStats
 */
  
 /*
   * Inheritance chain: GameObject -> CharacterStats -> Humanoid
-  * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
+  * Instances of Humanoid should have all of the same properties as CharacterStats 
+  * and GameObject.
   * Instances of CharacterStats should have all of the same properties as GameObject.
 */
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
+
+
+// Testing my first constructor function 
+// const kimee = new GameObject ({
+//   createdAt: new Date(), 
+//   name: 'kimee',
+//   dimensions: {
+//     length: 3, 
+//     width: 3, 
+//     height: 3
+//   }
+// }); 
+
+// console.log(kimee); 
 
 /*
   const mage = new Humanoid({
