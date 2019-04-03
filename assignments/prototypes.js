@@ -138,7 +138,7 @@ function Villain(villainAttributes){
 // Setting up Villain to inherit Humanoids prototype, including the function
 Villain.prototype = Object.create(Humanoid.prototype);  
 
-// Function 
+// Method to remove health points 
 Villain.prototype.shoot = function(victim) {
   let victimHP = victim.healthPoints - 3; 
   victim.healthPoints = victimHP; 
@@ -172,6 +172,33 @@ function Hero(heroAttributes){
   Humanoid.call(this, heroAttributes); 
   this.superPower = heroAttributes.superPower;   
 }
+
+// Setting up Hero to inherit Humanoids prototype, including the function
+Hero.prototype = Object.create(Humanoid.prototype);  
+
+// Function to remove health points 
+Hero.prototype.fightBack = function(victim) {
+  let victimHP = victim.healthPoints - 10; 
+  victim.healthPoints = victimHP; 
+  return `${this.name} slashes ${victim.name} for ${victimHP} damage`; 
+}
+
+const SuperSucculent = new Hero ({
+  createdAt: new Date(),
+    dimensions: {
+      length: 100,
+      width: 100,
+      height: 100,
+    },
+    healthPoints: 1000,
+    name: 'Super Succulent',
+    team: 'Spikey Plants',
+    weapons: [
+      'Spikey spikes',
+    ],
+    language: 'Common Tongue',
+    superPower: "Endurance"
+}); 
 
 // Uncommenting all my tests 
 
@@ -235,7 +262,8 @@ function Hero(heroAttributes){
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-  console.log(SassyPants.shoot(mage)); 
+  console.log(SassyPants.shoot(mage)); // Test for my Villain constructor function 
+  console.log(SuperSucculent.fightBack(mage)); // Test for my Hero constructor function 
 
 
   // Stretch task: 
