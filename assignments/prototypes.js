@@ -22,13 +22,13 @@
 */
 
 function GameObject(attributes) {
-  this.newCreatedAt = attributes.CreatedAt; 
-  this.newName = attributes.name; 
-  this.newDimensions = attributes.dimensions; 
+  this.createdAt = attributes.createdAt; 
+  this.name = attributes.name; 
+  this.dimensions = attributes.dimensions; 
 }
 
 GameObject.prototype.destroy = function() {
-  return `${this.name} was removed from the game.`
+  return `${this.name} was removed from the game.`; 
 }
 
 /*
@@ -37,6 +37,18 @@ GameObject.prototype.destroy = function() {
   * takeDamage() // prototype method -> returns the string '<object name> took damage.'
   * should inherit destroy() from GameObject's prototype
 */
+
+ function CharacterStats(characterAttributes){
+   GameObject.call(this, characterAttributes); 
+   this.healthPoints = characterAttributes.healthPoints; 
+ }
+
+ // Setting up CharacterStats to inherit GameObject's prototype, including the function 
+ CharacterStats.prototype = Object.create(GameObject.prototype); 
+
+ CharacterStats.prototype.takeDamage = function() {
+   return `${this.name} took damage.`; 
+ }
 
 /*
   === Humanoid (Having an appearance or character resembling that of a human.) ===
@@ -59,18 +71,40 @@ GameObject.prototype.destroy = function() {
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
 
-// Testing my first constructor function 
-// const kimee = new GameObject ({
-//   createdAt: new Date(), 
-//   name: 'kimee',
-//   dimensions: {
-//     length: 3, 
-//     width: 3, 
-//     height: 3
-//   }
-// }); 
+// Testing my GameObject constructor function 
+//  const kimee = new GameObject ({
+//    createdAt: new Date(), 
+//    name: 'kimee',
+//    dimensions: {
+//      length: 3, 
+//      width: 3, 
+//      height: 3
+//    }
+//  }); 
 
-// console.log(kimee); 
+//  console.log(kimee); 
+
+//  console.log(kimee.destroy()); 
+
+// // testing my first method 
+// console.log(kimee.destroy()); 
+
+// Testing Character Stats constructor function 
+  // const kimee = new CharacterStats ({
+  //     createdAt: new Date(), 
+  //     name: 'kimee',
+  //     dimensions: {
+  //       length: 3, 
+  //       width: 3, 
+  //       height: 3
+  //     },
+  //     healthPoints: 10  
+  //   }); 
+
+  // console.log(kimee); 
+  // console.log(kimee.destroy()); 
+  // console.log(kimee.takeDamage()); 
+
 
 /*
   const mage = new Humanoid({
