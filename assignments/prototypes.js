@@ -1,12 +1,23 @@
-/*
+/* I REORDERED INSTRUCTIONS A BIT TO HELP WITH ORGANIZATION 
+
   Object oriented design is commonly used in video games.  
-  For this part of the assignment you will be implementing several constructor 
-  functions with their correct inheritance hierarchy.
+  For this part of the assignment you will be 
+  
+  implementing several constructor functions 
+  with their correct inheritance hierarchy.
 
-  In this file you will be creating three constructor functions: GameObject, 
-  CharacterStats, Humanoid.  
+  In this file you will be creating three constructor functions: 
+  
+  GameObject
 
-  At the bottom of this file are 3 objects that all end up inheriting from Humanoid.  
+  CharacterStats
+    Instances of CharacterStats should have all of the same properties as GameObject.
+  
+  Humanoid  
+    (We've already created 3 objects that all should end up inheriting from Humanoid).
+    Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.  
+
+
   Use the objects at the bottom of the page to test your constructor functions.
   
   Each constructor function has unique properties and methods that are defined 
@@ -31,6 +42,22 @@ GameObject.prototype.destroy = function() {
   return `${this.name} was removed from the game.`; 
 }
 
+// Testing my GameObject constructor function 
+//  const kimee = new GameObject ({
+//    createdAt: new Date(), 
+//    name: 'kimee',
+//    dimensions: {
+//      length: 3, 
+//      width: 3, 
+//      height: 3
+//    }
+//  }); 
+
+//  console.log(kimee); 
+
+// // testing my GameObject method 
+// console.log(kimee.destroy()); 
+
 /*
   === CharacterStats ===
   * healthPoints
@@ -50,46 +77,7 @@ GameObject.prototype.destroy = function() {
    return `${this.name} took damage.`; 
  }
 
-/*
-  === Humanoid (Having an appearance or character resembling that of a human.) ===
-  * team
-  * weapons
-  * language
-  * greet() // prototype method -> returns the string '<object name> offers a greeting 
-  * in <object language>.'
-  * should inherit destroy() from GameObject through CharacterStats
-  * should inherit takeDamage() from CharacterStats
-*/
- 
-/*
-  * Inheritance chain: GameObject -> CharacterStats -> Humanoid
-  * Instances of Humanoid should have all of the same properties as CharacterStats 
-  * and GameObject.
-  * Instances of CharacterStats should have all of the same properties as GameObject.
-*/
-
-// Test you work by un-commenting these 3 objects and the list of console logs below:
-
-
-// Testing my GameObject constructor function 
-//  const kimee = new GameObject ({
-//    createdAt: new Date(), 
-//    name: 'kimee',
-//    dimensions: {
-//      length: 3, 
-//      width: 3, 
-//      height: 3
-//    }
-//  }); 
-
-//  console.log(kimee); 
-
-//  console.log(kimee.destroy()); 
-
-// // testing my first method 
-// console.log(kimee.destroy()); 
-
-// Testing Character Stats constructor function 
+ // Testing Character Stats constructor function 
   // const kimee = new CharacterStats ({
   //     createdAt: new Date(), 
   //     name: 'kimee',
@@ -102,11 +90,45 @@ GameObject.prototype.destroy = function() {
   //   }); 
 
   // console.log(kimee); 
-  // console.log(kimee.destroy()); 
-  // console.log(kimee.takeDamage()); 
 
+  // Testing both functions
+    // console.log(kimee.destroy()); 
+    // console.log(kimee.takeDamage()); 
 
 /*
+  === Humanoid (Having an appearance or character resembling that of a human.) ===
+  * team
+  * weapons
+  * language
+  * greet() // prototype method -> returns the string '<object name> offers a greeting 
+  * in <object language>.'
+  * should inherit destroy() from GameObject through CharacterStats
+  * should inherit takeDamage() from CharacterStats
+*/
+ 
+function Humanoid(humanoidAttributes){
+  CharacterStats.call(this, humanoidAttributes); 
+  this.team = humanoidAttributes.team; 
+  this.weapons = humanoidAttributes.weapons; 
+  this.language = humanoidAttributes.language; 
+}
+
+// Setting up Humanoid to inherit GameObject's prototype, including the function 
+Humanoid.prototype = Object.create(GameObject.prototype); 
+
+// Setting up Humanoid to inherit CharacterStat's prototype, including the function 
+Humanoid.prototype = Object.create(CharacterStats.prototype); 
+
+// Creating new greet protoype method 
+Humanoid.prototype.greet = function() {
+  return `${this.name} offers a greeting in ${this.language}.`; 
+}
+
+
+// Test you work by un-commenting these 3 objects and the list of console logs below:
+ 
+
+
   const mage = new Humanoid({
     createdAt: new Date(),
     dimensions: {
@@ -167,7 +189,7 @@ GameObject.prototype.destroy = function() {
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-*/
+
 
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
