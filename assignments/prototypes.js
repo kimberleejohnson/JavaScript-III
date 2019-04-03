@@ -180,7 +180,12 @@ Hero.prototype = Object.create(Humanoid.prototype);
 Hero.prototype.fightBack = function(victim) {
   let victimHP = victim.healthPoints - 10; 
   victim.healthPoints = victimHP; 
-  return `${this.name} slashes ${victim.name} for ${victimHP} damage`; 
+  // Beginning code for the loop 
+  if (victim.healthPoints < 0) {
+    return `${this.name} slashes ${victim.name} for ${victimHP} damage`; 
+  } else {
+    return `${this.name} slashes ${victim.name} for ${victimHP} damage`; 
+  }
 }
 
 const SuperSucculent = new Hero ({
