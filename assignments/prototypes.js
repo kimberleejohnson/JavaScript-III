@@ -124,10 +124,56 @@ Humanoid.prototype.greet = function() {
   return `${this.name} offers a greeting in ${this.language}.`; 
 }
 
+/*
+  === Villain (This is my bad guy constructor function) ===
+  * Inherits from the Humanoid constructor function.  
+  * Method called shoot that removes health points from objects which could result in destruction if health gets to 0 or drops below 0
+*/
 
-// Test you work by un-commenting these 3 objects and the list of console logs below:
- 
+function Villain(villainAttributes){
+  Humanoid.call(this, villainAttributes); 
+  this.catchPhrase = villainAttributes.catchPhrase; 
+}
 
+// Setting up Villain to inherit Humanoids prototype, including the function
+Villain.prototype = Object.create(Humanoid.prototype);  
+
+// Function 
+Villain.prototype.shoot = function(victim) {
+  let victimHP = victim.healthPoints - 3; 
+  victim.healthPoints = victimHP; 
+  return `${this.name} slashes ${victim.name} for ${victimHP} damage`; 
+}
+
+const SassyPants = new Villain ({
+  createdAt: new Date(),
+    dimensions: {
+      length: 5,
+      width: 10,
+      height: 10,
+    },
+    healthPoints: 100,
+    name: 'SassyPants',
+    team: 'Sassy House',
+    weapons: [
+      'Sharp tongue',
+    ],
+    language: 'Common Tongue',
+    catchPhrase: "That's the way the cookie crumbles!"
+}); 
+
+/*
+  === Hero (This is my good guy constructor function) ===
+  * Inherits from the Humanoid constructor function.  
+  * Method called shoot that removes health points from objects which could result in destruction if health gets to 0 or drops below 0
+*/
+
+function Hero(heroAttributes){
+  Humanoid.call(this, heroAttributes); 
+  this.superPower = heroAttributes.superPower;   
+}
+
+// Uncommenting all my tests 
 
   const mage = new Humanoid({
     createdAt: new Date(),
@@ -189,9 +235,10 @@ Humanoid.prototype.greet = function() {
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
+  console.log(SassyPants.shoot(mage)); 
 
 
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
-  // * Create two new objects, one a villain and one a hero and fight it out with methods!
+  // * Use your new functions to create two new objects, one a villain and one a hero and fight it out with methods!
