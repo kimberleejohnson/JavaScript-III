@@ -143,7 +143,7 @@ Villain.prototype.shoot = function(victim) {
   let victimHP = victim.healthPoints - 15; 
 
   if (victimHP <= 0) {
-    return `${this.name} slashes ${victim.name} for ${victimHP} damage. ${this.name} is out of the game.`; 
+    return `${this.name} slashes ${victim.name} for ${victimHP} damage. ${victim.name} is out of the game.`; 
   } else {
     return `${this.name} slashes ${victim.name} for ${victimHP} damage`; 
   } 
@@ -185,11 +185,11 @@ Hero.prototype.fightBack = function(victim) {
   let victimHP = victim.healthPoints - 10; 
   victim.healthPoints = victimHP; 
   // Beginning code for the loop 
-  if (victim.healthPoints < 0) {
-    return `${this.name} slashes ${victim.name} for ${victimHP} damage`; 
+  if (victimHP <= 0) {
+    return `${this.name} slashes ${victim.name} for ${victimHP} damage. ${victim.name} is out of the game.`; 
   } else {
     return `${this.name} slashes ${victim.name} for ${victimHP} damage`; 
-  }
+  } 
 }
 
 const SuperSucculent = new Hero ({
