@@ -140,9 +140,13 @@ Villain.prototype = Object.create(Humanoid.prototype);
 
 // Method to remove health points 
 Villain.prototype.shoot = function(victim) {
-  let victimHP = victim.healthPoints - 3; 
-  victim.healthPoints = victimHP; 
-  return `${this.name} slashes ${victim.name} for ${victimHP} damage`; 
+  let victimHP = victim.healthPoints - 15; 
+
+  if (victimHP <= 0) {
+    return `${this.name} slashes ${victim.name} for ${victimHP} damage. ${this.name} is out of the game.`; 
+  } else {
+    return `${this.name} slashes ${victim.name} for ${victimHP} damage`; 
+  } 
 }
 
 const SassyPants = new Villain ({
